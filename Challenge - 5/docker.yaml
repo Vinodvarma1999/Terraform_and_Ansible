@@ -1,0 +1,40 @@
+---
+- hosts: server 
+  become: true 
+  gather_facts: false 
+  vars: 
+   app_name: my-app 
+   app_port: 80 
+   docker_image: nginx 
+   docker_container_name: "{{ app_name }}_container"
+
+  tasks:
+  - name: Install Docker 
+    apt: 
+     name: docker.io 
+     state: present 
+
+  - name: Start Docker Service 
+    service:
+     name: docker 
+     state: started  
+
+  - name: Pull Docker Image 
+    docker_image:
+     name: "{{ docker_image }}"
+     source: pull 
+
+  - name: Remove existing Docker container 
+    docker_container: 
+     name: "{{ docker_container_name }}"
+     state: absent 
+     force_kill: true 
+    ignore_errors: true 
+
+  - name: Start Docker Container 
+    docker_container:
+     name: "{{ docker_container_name }}"
+     image: "{{ docker_image }}"
+     ports: 
+      - "{{ app_port }}:{{ app_port }}"
+     restart_policy: always            

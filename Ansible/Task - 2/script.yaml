@@ -1,0 +1,5 @@
+---
+- hosts: all 
+  tasks: 
+  - name: run script on remote server 
+    script: /home/ubuntu/d.sh 

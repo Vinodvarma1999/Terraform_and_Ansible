@@ -1,0 +1,12 @@
+---
+- name: Create a user on remote server
+  hosts: all
+  become: true
+
+  tasks:
+    - name: Create a user on remote server
+      user:
+        name: abc
+        state: present
+        groups: sudo
+        password: "{{ 'mypassword' | password_hash('sha512', 'mysecretpass') }}"

@@ -1,0 +1,13 @@
+
+---
+- name: Create a directory on remote server
+  hosts: all
+  become: true
+
+  tasks:
+    - name: Create a directory on remote server
+      file:
+        path: /home/ubuntu/xyz
+        state: directory
+        mode: '0755'
+

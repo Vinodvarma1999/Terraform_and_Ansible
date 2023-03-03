@@ -1,0 +1,12 @@
+---
+- name: Add a line to a configuration file
+  hosts: all
+  become: true
+
+  tasks:
+    - name: Add a line to a configuration file
+      lineinfile:
+        path: /home/ubuntu/abc
+        line: 'new line to add'
+        create: yes
+

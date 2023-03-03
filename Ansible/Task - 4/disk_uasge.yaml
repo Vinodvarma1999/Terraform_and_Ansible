@@ -1,0 +1,17 @@
+---
+- hosts: all
+  vars: 
+   email_recipient: abc@example.com
+   disk_threshold: 90
+  tasks: 
+  - name: Check disk usage 
+    shell: "df -h / | awk '{ print $5 }' | tail -n 1 | tr -d '%'"
+    register: disk_usage
+  - name: Send mail notification 
+    when: disk_usage.stdout|int > disk_threshold
+    mail:
+     to: "{{ email_recipient  }}"
+     subject: "Disk usage exceeded threshold"
+     body: "Disk usage is {{ disk_usage.stdout }}%"
+    become: yes 
+    become_user: root  

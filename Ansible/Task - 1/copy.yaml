@@ -1,0 +1,8 @@
+---
+- hosts: all
+  become: true
+  tasks:
+  - name: Copy file to another server 
+    copy: 
+     src: /home/ubuntu/d.sh 
+     dest: /home/ubuntu/

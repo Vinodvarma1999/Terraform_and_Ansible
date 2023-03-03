@@ -1,0 +1,8 @@
+---
+- name: Execute a command on remote server
+  hosts: all
+  become: true
+
+  tasks:
+    - name: Execute a command on remote server
+      command: ls -l /home/ubuntu

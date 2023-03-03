@@ -1,0 +1,9 @@
+---
+- name: Execute a shell command on remote server
+  hosts: all
+  become: true
+
+  tasks:
+    - name: Execute a shell command on remote server
+      shell: 'echo "Hello World" >> /home/ubuntu/file.txt'
+
